@@ -1,0 +1,106 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid">
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🤝</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ partners_count }}</div>
+                <div class="stat-label">Hamkorlar</div>
+            </div>
+            <a href="{% url 'partners_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">💬</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ testimonials_count }}</div>
+                <div class="stat-label">Fikrlar</div>
+            </div>
+            <a href="{% url 'testimonials_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">💰</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ pricing_plans_count }}</div>
+                <div class="stat-label">Tariflar</div>
+            </div>
+            <a href="{% url 'pricing_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">📧</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ contact_requests_count }}</div>
+                <div class="stat-label">So'rovlar</div>
+            </div>
+            <a href="{% url 'contacts_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+    </div>
+    
+    <!-- Recent Contacts -->
+    <div class="recent-section">
+        <div class="section-header">
+            <h2>So'nggi so'rovlar</h2>
+            <a href="{% url 'contacts_list' %}" class="view-all">Barchasini ko'rish</a>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Ism</th>
+                        <th>Telefon</th>
+                        <th>Email</th>
+                        <th>Tarif</th>
+                        <th>Sana</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in recent_contacts %}
+                    <tr>
+                        <td><strong>{{ contact.name }}</strong></td>
+                        <td>{{ contact.phone }}</td>
+                        <td>{{ contact.email|default:"—" }}</td>
+                        <td><span class="badge">{{ contact.plan|default:"Umumiy" }}</span></td>
+                        <td>{{ contact.created_at|date:"d.m.Y H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #888;">Hozircha so'rovlar yo'q</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h2>Tezkor amallar</h2>
+        <div class="actions-grid">
+            <a href="{% url 'partner_create' %}" class="action-card">
+                <div class="action-icon">➕</div>
+                <div class="action-title">Hamkor qo'shish</div>
+            </a>
+            <a href="{% url 'testimonial_create' %}" class="action-card">
+                <div class="action-icon">✍️</div>
+                <div class="action-title">Fikr qo'shish</div>
+            </a>
+            <a href="{% url 'pricing_create' %}" class="action-card">
+                <div class="action-icon">💵</div>
+                <div class="action-title">Tarif qo'shish</div>
+            </a>
+            <a href="{% url 'index' %}" target="_blank" class="action-card">
+                <div class="action-icon">🌐</div>
+                <div class="action-title">Saytni ko'rish</div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

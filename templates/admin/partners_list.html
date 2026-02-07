@@ -1,0 +1,50 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Hamkorlar{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'partner_create' %}" class="btn btn-primary">+ Hamkor qo'shish</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Logo</th>
+                <th>Nomi</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partner in partners %}
+            <tr>
+                <td><strong>#{{ partner.id }}</strong></td>
+                <td>
+                    {% if partner.logo %}
+                        <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="width: 60px; height: 40px; object-fit: contain; border-radius: 8px; background: white; padding: 5px;">
+                    {% else %}
+                        <span style="color: #888;">Logo yo'q</span>
+                    {% endif %}
+                </td>
+                <td><strong>{{ partner.name }}</strong></td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'partner_edit' partner.id %}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">✏️ Tahrirlash</a>
+                        <form method="POST" action="{% url 'partner_delete' partner.id %}" style="display: inline;" onsubmit="return confirmDelete('Bu hamkorni o\'chirmoqchimisiz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; color: #888; padding: 3rem;">Hozircha hamkorlar yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
