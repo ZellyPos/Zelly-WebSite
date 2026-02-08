@@ -1,10 +1,14 @@
 from django.urls import path
-from .views import index_view, contact_view
+from .views import index_view, contact_view, about_view, team_view, careers_view, blog_view
 from . import admin_views
 
 urlpatterns = [
     path('', index_view, name='index'),
     path('contact/', contact_view, name='contact'),
+    path('about/', about_view, name='about'),
+    path('team/', team_view, name='team'),
+    path('careers/', careers_view, name='careers'),
+    path('blog/', blog_view, name='blog'),
     
     # Custom Admin Panel
     path('admin-panel/login/', admin_views.admin_login, name='admin_login'),
@@ -32,4 +36,31 @@ urlpatterns = [
     # Contacts
     path('admin-panel/contacts/', admin_views.contacts_list, name='contacts_list'),
     path('admin-panel/contacts/<int:pk>/delete/', admin_views.contact_delete, name='contact_delete'),
+    
+    # About Stats CRUD
+    path('admin-panel/stats/', admin_views.admin_stats_list, name='admin_stats_list'),
+    path('admin-panel/stats/create/', admin_views.admin_stat_create, name='admin_stat_create'),
+    path('admin-panel/stats/<int:pk>/edit/', admin_views.admin_stat_edit, name='admin_stat_edit'),
+    path('admin-panel/stats/<int:pk>/delete/', admin_views.admin_stat_delete, name='admin_stat_delete'),
+    
+    # Team CRUD
+    path('admin-panel/team/', admin_views.admin_team_list, name='admin_team_list'),
+    path('admin-panel/team/create/', admin_views.admin_team_create, name='admin_team_create'),
+    path('admin-panel/team/<int:pk>/edit/', admin_views.admin_team_edit, name='admin_team_edit'),
+    path('admin-panel/team/<int:pk>/delete/', admin_views.admin_team_delete, name='admin_team_delete'),
+    
+    # Jobs CRUD
+    path('admin-panel/jobs/', admin_views.admin_jobs_list, name='admin_jobs_list'),
+    path('admin-panel/jobs/create/', admin_views.admin_job_create, name='admin_job_create'),
+    path('admin-panel/jobs/<int:pk>/edit/', admin_views.admin_job_edit, name='admin_job_edit'),
+    path('admin-panel/jobs/<int:pk>/delete/', admin_views.admin_job_delete, name='admin_job_delete'),
+    
+    # Blog CRUD
+    path('admin-panel/blog/', admin_views.admin_blog_list, name='admin_blog_list'),
+    path('admin-panel/blog/create/', admin_views.admin_blog_create, name='admin_blog_create'),
+    path('admin-panel/blog/<int:pk>/edit/', admin_views.admin_blog_edit, name='admin_blog_edit'),
+    path('admin-panel/blog/<int:pk>/delete/', admin_views.admin_blog_delete, name='admin_blog_delete'),
+    
+    # Settings CRUD
+    path('admin-panel/settings/', admin_views.admin_settings_list, name='admin_settings_list'),
 ]

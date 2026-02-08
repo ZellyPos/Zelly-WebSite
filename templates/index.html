@@ -1,32 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZELLY - Premium POS Tizim | Kafe va Restoranlar Uchun</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">ZELLY</a>
-            <ul class="nav-links">
-                <li><a href="#features">Imkoniyatlar</a></li>
-                <li><a href="#benefits">Afzalliklar</a></li>
-                <li><a href="#partners">Hamkorlar</a></li>
-                <li><a href="#testimonials">Fikrlar</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#pricing">Narxlar</a></li>
-            </ul>
-            <button class="cta-btn" onclick="openVideoModal()">Demo Ko'rish</button>
-        </div>
-    </nav>
 
+{% block title %}ZELLY - Premium POS Tizim | Kafe va Restoranlar Uchun{% endblock %}
+
+{% block content %}
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -35,8 +12,11 @@
                 <p class="subtitle">ZELLY - kafe va restoranlar uchun zamonaviy POS tizim. Buyurtmalarni boshqaring, to'lovlarni qabul qiling, inventarni nazorat qiling va biznesingizni o'sishini kuzating.</p>
                 <div class="hero-buttons">
                     <button class="btn-primary" onclick="openContactModal('Business')">Bepul Boshlash</button>
-                    <button class="btn-secondary" onclick="openVideoModal()">Qanday Ishlaydi?</button>
+                    <button class="btn-secondary" onclick="openVideoModal('{{ site_settings.youtube_id }}')"><span>▶️</span> Qanday Ishlaydi?</button>
                 </div>
+                <p class="trial-text" style="color: var(--gold); margin-top: 1.5rem; font-weight: 500; font-size: 0.9rem; opacity: 0.9; display: flex; align-items: center; gap: 0.5rem; animation: fadeInUp 1s ease 0.6s backwards;">
+                    <span style="font-size: 1.2rem;">✨</span> 14 kunlik bepul sinov davri. Kredit karta talab qilinmaydi.
+                </p>
             </div>
             <div class="hero-visual">
                 <div class="mockup-container">
@@ -99,7 +79,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">💰</div>
                         <h3 class="feature-title">Xarajatlar Nazorati</h3>
-                        <p class="feature-description">Barcha xarajatlarni tizimda hisoblab boring va moliyani boshqaring.</p>
+                        <p class="feature-description">Balla xarajatlarni tizimda hisoblab boring va moliyani boshqaring.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎨</div>
@@ -154,7 +134,7 @@
                     <div class="benefit-number">03</div>
                     <div class="benefit-content">
                         <h3>Daromadni Oshirish</h3>
-                    <p>O'rtacha 25-30% daromad o'sishiga erishgan mijozlarimiz. Samarali boshqaruv orqali ko'proq daromad oling.</p>
+                        <p>O'rtacha 25-30% daromad o'sishiga erishgan mijozlarimiz. Samarali boshqaruv orqali ko'proq daromad oling.</p>
                     </div>
                 </div>
                 <div class="benefit-item">
@@ -309,24 +289,6 @@
                     <p>Bizda 24/7 qo'llab-quvvatlash xizmati mavjud (Business va Enterprise tarif rejalarida). Telefon, email va onlayn chat orqali bizga murojaat qilishingiz mumkin. O'rtacha javob vaqti 15 daqiqa.</p>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Bir nechta filialim bor, ZELLY ularni birlashtiradimi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Ha! Business va Enterprise tarif rejalarimiz bir nechta filialni boshqarish imkoniyatini beradi. Barcha filiallarni bir markazdan nazorat qiling va umumiy hisobotlarni ko'ring.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Tarifni keyinchalik o'zgartirish mumkinmi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Albatta! Istalgan vaqtda tarifingizni upgrade yoki downgrade qilishingiz mumkin. O'zgarishlar darhol kuchga kiradi va to'lovlar proporsional hisoblanadi.</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -370,101 +332,4 @@
             </form>
         </div>
     </section>
-
-    <!-- Video Modal -->
-    <div id="videoModal" class="modal">
-        <div class="modal-overlay" onclick="closeVideoModal()"></div>
-        <div class="modal-content video-modal-content">
-            <button class="modal-close" onclick="closeVideoModal()">&times;</button>
-            <div class="video-container">
-                <iframe id="youtubeVideo" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-overlay" onclick="closeContactModal()"></div>
-        <div class="modal-content contact-modal-content">
-            <button class="modal-close" onclick="closeContactModal()">&times;</button>
-            <div class="contact-modal-header">
-                <h2>Bog'lanish</h2>
-                <p>Ma'lumotlaringizni qoldiring, tez orada siz bilan bog'lanamiz</p>
-            </div>
-            <form class="contact-form" action="{% url 'contact' %}" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="contactName">Ismingiz *</label>
-                    <input type="text" id="contactName" name="name" required placeholder="To'liq ismingizni kiriting">
-                </div>
-                <div class="form-group">
-                    <label for="contactPhone">Telefon raqamingiz *</label>
-                    <input type="tel" id="contactPhone" name="phone" required placeholder="+998 90 123 45 67">
-                </div>
-                <div class="form-group">
-                    <label for="contactPlan">Tarif rejasi *</label>
-                    <select id="contactPlan" name="plan" required>
-                        <option value="">Tanlang...</option>
-                        {% for plan in pricing_plans %}
-                        <option value="{{ plan.name }}">{{ plan.name }} - {{ plan.price }}{{ plan.period }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="contactMessage">Qo'shimcha ma'lumot (ixtiyoriy)</label>
-                    <textarea id="contactMessage" name="message" rows="4" placeholder="Savollaringiz yoki qo'shimcha ma'lumotlar..."></textarea>
-                </div>
-                <button type="submit" class="form-submit-btn">Yuborish</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div>
-                <div class="footer-brand">ZELLY</div>
-                <p class="footer-description">Kafe va restoranlar uchun zamonaviy POS tizim. Biznesingizni oson va samarali boshqaring.</p>
-                <div class="footer-social">
-                    <a href="#" class="social-icon">f</a>
-                    <a href="#" class="social-icon">in</a>
-                    <a href="#" class="social-icon">t</a>
-                    <a href="#" class="social-icon">ig</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>Mahsulot</h4>
-                <ul class="footer-links">
-                    <li><a href="#features">Imkoniyatlar</a></li>
-                    <li><a href="#pricing">Narxlar</a></li>
-                    <li><a href="#">Demo</a></li>
-                    <li><a href="#">Yangiliklar</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Kompaniya</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Biz haqimizda</a></li>
-                    <li><a href="#">Jamoamiz</a></li>
-                    <li><a href="#">Karyera</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Yordam</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Qo'llab-quvvatlash</a></li>
-                    <li><a href="#">Hujjatlar</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Aloqa</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 ZELLY. Barcha huquqlar himoyalangan.</p>
-        </div>
-    </footer>
-
-    <script src="{% static 'script.js' %}"></script>
-</body>
-</html>
+{% endblock %}

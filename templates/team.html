@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Jamoamiz - ZELLY Premium POS{% endblock %}
+
+{% block content %}
+<section class="premium-page-header">
+    <div class="section-label">Jamoamiz</div>
+    <h1 class="premium-title">Muvaffaqiyatimiz Ortidagi Insonlar</h1>
+    <p class="section-description" style="max-width: 700px; margin: 0 auto; color: var(--text-gray); font-size: 1.2rem;">Sizning biznesingizni yangi bosqichga olib chiqish uchun tunu-kun ishlaydigan mutaxassislar jamoasi.</p>
+</section>
+
+<section class="team-grid-section">
+    <div class="team-container">
+        <div class="team-layout">
+            {% for member in members %}
+            <div class="team-member-card">
+                <div class="member-image-wrapper">
+                    {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                    <div class="member-placeholder-img">{{ member.emoji }}</div>
+                    {% endif %}
+                    <div class="member-social-overlay">
+                        {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank">ln</a>{% endif %}
+                        {% if member.twitter %}<a href="{{ member.twitter }}" target="_blank">tw</a>{% endif %}
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>{{ member.name }}</h3>
+                    <p class="member-role">{{ member.role }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Fallback if no members -->
+            <div class="team-member-card">
+                <div class="member-image-wrapper">
+                    <div class="member-placeholder-img">👨‍💼</div>
+                </div>
+                <div class="member-info">
+                    <h3>Jasur Akhmedov</h3>
+                    <p class="member-role">Asoschi & CEO</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="join-team-premium">
+    <div class="cta-container">
+        <h2>Siz ham bizning jamoaga qo'shilmoqchimisiz?</h2>
+        <p>Biz doimo iqtidorli va g'ayratli mutaxassislarni qidiramiz.</p>
+        <a href="{% url 'careers' %}" class="btn-primary" style="display: inline-block; text-decoration: none;">Bo'sh ish o'rinlari</a>
+    </div>
+</section>
+
+<style>
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+.team-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem;
+}
+.team-member-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+.team-member-card:hover {
+    transform: translateY(-15px);
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.05);
+}
+.member-image-wrapper {
+    height: 300px;
+    position: relative;
+    background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.member-placeholder-img {
+    font-size: 6rem;
+    filter: grayscale(1);
+    transition: all 0.4s ease;
+}
+.team-member-card:hover .member-placeholder-img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+.member-social-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+.team-member-card:hover .member-social-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+.member-social-overlay a {
+    width: 40px;
+    height: 40px;
+    background: var(--gold);
+    color: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+.member-social-overlay a:hover {
+    background: var(--white);
+    transform: scale(1.1);
+}
+.member-info {
+    padding: 2rem;
+}
+.member-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+.member-role {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.join-team-premium {
+    padding: 8rem 2rem;
+    background: linear-gradient(to top, rgba(212, 175, 55, 0.1), transparent);
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .team-layout { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}

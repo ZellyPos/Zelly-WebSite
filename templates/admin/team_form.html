@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}{% if action == 'create' %}Jamoa azosi qo'shish{% else %}Jamoa azosini tahrirlash{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">To'liq ism *</label>
+            <input type="text" id="name" name="name" value="{{ member.name|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Lavozim *</label>
+            <input type="text" id="role" name="role" value="{{ member.role|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emoji">Emoji (agar rasm bo'lmasa ishlatiladi)</label>
+            <input type="text" id="emoji" name="emoji" value="{{ member.emoji|default:'👨‍💼' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Rasm (ixtiyoriy)</label>
+            <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(this)">
+            {% if member.image %}
+                <img id="image-preview" src="{{ member.image.url }}" style="margin-top: 1rem; max-width: 200px; border-radius: 10px; display: block;">
+            {% else %}
+                <img id="image-preview" style="margin-top: 1rem; max-width: 200px; border-radius: 10px; display: none;">
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="linkedin">LinkedIn URL</label>
+            <input type="url" id="linkedin" name="linkedin" value="{{ member.linkedin|default:'' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="twitter">Twitter/X URL</label>
+            <input type="url" id="twitter" name="twitter" value="{{ member.twitter|default:'' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="order">Tartib raqami</label>
+            <input type="number" id="order" name="order" value="{{ member.order|default:'0' }}">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+            <a href="{% url 'admin_team_list' %}" class="btn btn-secondary">← Bekor qilish</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

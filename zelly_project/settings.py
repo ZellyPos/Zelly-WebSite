@@ -62,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'website.context_processors.website_settings',
             ],
         },
     },
@@ -123,3 +124,8 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Telegram Settings
+import os
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '8054199374:AAG31jTvTlq4vTxkrHjIf8pLlgnR3URC450')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '-1003743956865')

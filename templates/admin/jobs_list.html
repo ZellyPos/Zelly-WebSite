@@ -1,0 +1,44 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Bo'sh Ish O'rinlari{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'admin_job_create' %}" class="btn btn-primary">+ Vakansiya qo'shish</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Sarlavha</th>
+                <th>Tags</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td><strong>#{{ job.id }}</strong></td>
+                <td><strong>{{ job.title }}</strong></td>
+                <td>{{ job.tags }}</td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'admin_job_edit' job.id %}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">✏️ Tahrirlash</a>
+                        <form method="POST" action="{% url 'admin_job_delete' job.id %}" style="display: inline;" onsubmit="return confirm('O\'chirmoqchimisiz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; color: #888; padding: 3rem;">Hozircha vakansiyalar yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

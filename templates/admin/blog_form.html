@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}{% if action == 'create' %}Blog xabari qo'shish{% else %}Blog xabarini tahrirlash{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="title">Sarlavha *</label>
+            <input type="text" id="title" name="title" value="{{ post.title|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Kategoriya *</label>
+            <input type="text" id="category" name="category" value="{{ post.category|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Sana *</label>
+            <input type="date" id="date" name="date" value="{{ post.date|date:'Y-m-d'|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emoji">Emoji (agar rasm bo'lmasa ishlatiladi)</label>
+            <input type="text" id="emoji" name="emoji" value="{{ post.emoji|default:'📝' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Rasm (ixtiyoriy)</label>
+            <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(this)">
+            {% if post.image %}
+                <img id="image-preview" src="{{ post.image.url }}" style="margin-top: 1rem; max-width: 200px; border-radius: 10px; display: block;">
+            {% else %}
+                <img id="image-preview" style="margin-top: 1rem; max-width: 200px; border-radius: 10px; display: none;">
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="short_description">Qisqa tavsif * (kardda ko'rinadigan qism)</label>
+            <textarea id="short_description" name="short_description" rows="3" required>{{ post.short_description|default:'' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="content">To'liq maqola contenti * (modalda ko'rinadi)</label>
+            <textarea id="content" name="content" rows="10" required>{{ post.content|default:'' }}</textarea>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+            <a href="{% url 'admin_blog_list' %}" class="btn btn-secondary">← Bekor qilish</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

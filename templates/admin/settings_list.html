@@ -1,0 +1,33 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Sayt Sozlamalari{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1); margin-bottom: 2rem;">
+            <p style="color: var(--text-gray); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                ⚠️ Diqqat! Bu sozlamalar saytning ishlashiga bevosita ta'sir qiladi. Iltimos, o'zgartirish kiritishda ehtiyot bo'ling.
+            </p>
+            
+            {% for setting in settings %}
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <label for="{{ setting.key }}" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>{{ setting.key|capfirst }}</span>
+                    {% if setting.description %}
+                    <small style="color: var(--text-gray); font-weight: normal;">({{ setting.description }})</small>
+                    {% endif %}
+                </label>
+                <input type="text" id="{{ setting.key }}" name="{{ setting.key }}" value="{{ setting.value }}" required>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Barcha o'zgarishlarni saqlash</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

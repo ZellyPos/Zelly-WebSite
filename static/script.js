@@ -119,15 +119,17 @@ function toggleFAQ(button) {
 }
 
 // Video Modal Functions
-function openVideoModal() {
+function openVideoModal(videoId = null) {
     console.log('Attempting to open video modal...');
     const modal = document.getElementById('videoModal');
     const iframe = document.getElementById('youtubeVideo');
     if (modal && iframe) {
-        iframe.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1`;
+        const vid = videoId || YOUTUBE_VIDEO_ID;
+        const origin = window.location.origin;
+        iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&enablejsapi=1&origin=${origin}`;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Modal opened successfully');
+        console.log('Modal opened successfully with ID:', vid);
     } else {
         console.error('Video modal or iframe not found in DOM!');
         alert('Texnik nosozlik: Video modal topilmadi. Sahifani qayta yuklab ko\'ring.');

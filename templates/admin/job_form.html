@@ -1,0 +1,41 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}{% if action == 'create' %}Vakansiya qo'shish{% else %}Vakansiyani tahrirlash{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="title">Sarlavha *</label>
+            <input type="text" id="title" name="title" value="{{ job.title|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="technologies">Texnologiyalar * (vergul bilan ajrating)</label>
+            <input type="text" id="technologies" name="technologies" value="{{ job.technologies|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Taglar * (vergul bilan ajrating, masalan: "Full-time, Remote")</label>
+            <input type="text" id="tags" name="tags" value="{{ job.tags|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Batafsil ma'lumot</label>
+            <textarea id="description" name="description" rows="5" required>{{ job.description|default:'' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="order">Tartib raqami</label>
+            <input type="number" id="order" name="order" value="{{ job.order|default:'0' }}">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+            <a href="{% url 'admin_jobs_list' %}" class="btn btn-secondary">← Bekor qilish</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

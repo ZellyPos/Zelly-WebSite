@@ -41,6 +41,42 @@
             </div>
             <a href="{% url 'contacts_list' %}" class="stat-link">Ko'rish →</a>
         </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);">📈</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ stats_count }}</div>
+                <div class="stat-label">Statistika</div>
+            </div>
+            <a href="{% url 'admin_stats_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">👥</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ team_count }}</div>
+                <div class="stat-label">Jamoa</div>
+            </div>
+            <a href="{% url 'admin_team_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #7028e4 0%, #e5b2ca 100%);">💼</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ jobs_count }}</div>
+                <div class="stat-label">Karyera</div>
+            </div>
+            <a href="{% url 'admin_jobs_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">📝</div>
+            <div class="stat-details">
+                <div class="stat-value">{{ blog_count }}</div>
+                <div class="stat-label">Blog</div>
+            </div>
+            <a href="{% url 'admin_blog_list' %}" class="stat-link">Ko'rish →</a>
+        </div>
     </div>
     
     <!-- Recent Contacts -->

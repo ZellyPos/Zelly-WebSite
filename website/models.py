@@ -46,3 +46,53 @@ class ContactRequest(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.plan or 'CTA'}"
+
+class AboutStatistic(models.Model):
+    label = models.CharField(max_length=100)
+    value = models.CharField(max_length=50) # e.g. "2023", "500+", "24/7"
+    order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.label
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='team/', null=True, blank=True)
+    emoji = models.CharField(max_length=10, default="👨‍💼", blank=True)
+    linkedin = models.URLField(blank=True, null=True)
+    twitter = models.URLField(blank=True, null=True)
+    order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+class JobOpening(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    technologies = models.CharField(max_length=200, help_text="Comma separated tags")
+    tags = models.CharField(max_length=200, help_text="Comma separated tags like Full-time, Remote")
+    order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    category = models.CharField(max_length=100)
+    date = models.DateField()
+    short_description = models.TextField()
+    content = models.TextField()
+    image = models.ImageField(upload_to='blog/', null=True, blank=True)
+    emoji = models.CharField(max_length=10, default="📝", blank=True)
+
+    def __str__(self):
+        return self.title
+
+class WebsiteSetting(models.Model):
+    key = models.CharField(max_length=50, unique=True)
+    value = models.TextField()
+    description = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return self.key

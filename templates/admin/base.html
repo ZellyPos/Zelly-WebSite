@@ -38,6 +38,26 @@
                     <span class="icon">📧</span>
                     <span>So'rovlar</span>
                 </a>
+                <a href="{% url 'admin_stats_list' %}" class="nav-item {% if 'stats' in request.path %}active{% endif %}">
+                    <span class="icon">📈</span>
+                    <span>Statistika</span>
+                </a>
+                <a href="{% url 'admin_team_list' %}" class="nav-item {% if 'team' in request.path %}active{% endif %}">
+                    <span class="icon">👥</span>
+                    <span>Jamoa</span>
+                </a>
+                <a href="{% url 'admin_jobs_list' %}" class="nav-item {% if 'jobs' in request.path %}active{% endif %}">
+                    <span class="icon">💼</span>
+                    <span>Karyera</span>
+                </a>
+                <a href="{% url 'admin_blog_list' %}" class="nav-item {% if 'blog' in request.path %}active{% endif %}">
+                    <span class="icon">📝</span>
+                    <span>Blog</span>
+                </a>
+                <a href="{% url 'admin_settings_list' %}" class="nav-item {% if 'settings' in request.path %}active{% endif %}">
+                    <span class="icon">⚙️</span>
+                    <span>Sozlamalar</span>
+                </a>
             </nav>
             
             <div class="sidebar-footer">

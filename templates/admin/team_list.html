@@ -1,0 +1,50 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Jamoa Azolari{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'admin_team_create' %}" class="btn btn-primary">+ Azo qo'shish</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Rasm/Emoji</th>
+                <th>F.I.SH</th>
+                <th>Lavozim</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td>
+                    {% if member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                    {% else %}
+                        <span style="font-size: 2rem;">{{ member.emoji }}</span>
+                    {% endif %}
+                </td>
+                <td><strong>{{ member.name }}</strong></td>
+                <td>{{ member.role }}</td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'admin_team_edit' member.id %}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">✏️ Tahrirlash</a>
+                        <form method="POST" action="{% url 'admin_team_delete' member.id %}" style="display: inline;" onsubmit="return confirm('O\'chirmoqchimisiz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; color: #888; padding: 3rem;">Hozircha jamoa azolari yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
