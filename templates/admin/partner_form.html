@@ -1,0 +1,31 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}{% if action == 'create' %}Hamkor qo'shish{% else %}Hamkorni tahrirlash{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">Hamkor nomi *</label>
+            <input type="text" id="name" name="name" value="{{ partner.name|default:'' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="logo">Logo</label>
+            <input type="file" id="logo" name="logo" accept="image/*" onchange="previewImage(this)">
+            {% if partner.logo %}
+                <img id="image-preview" src="{{ partner.logo.url }}" style="margin-top: 1rem; max-width: 200px; border-radius: 10px; display: block;">
+            {% else %}
+                <img id="image-preview" style="margin-top: 1rem; max-width: 200px; border-radius: 10px; display: none;">
+            {% endif %}
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+            <a href="{% url 'partners_list' %}" class="btn btn-secondary">← Bekor qilish</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

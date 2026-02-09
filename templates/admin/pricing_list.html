@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Tariflar{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'pricing_create' %}" class="btn btn-primary">+ Tarif qo'shish</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nomi</th>
+                <th>Narx</th>
+                <th>Davr</th>
+                <th>Mashhur</th>
+                <th>Tartib</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in plans %}
+            <tr>
+                <td><strong>#{{ plan.id }}</strong></td>
+                <td><strong>{{ plan.name }}</strong></td>
+                <td style="color: var(--gold); font-weight: 700;">{{ plan.price }} so'm</td>
+                <td>{{ plan.period }}</td>
+                <td>
+                    {% if plan.is_featured %}
+                        <span class="badge" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black);">⭐ Mashhur</span>
+                    {% else %}
+                        <span style="color: #888;">—</span>
+                    {% endif %}
+                </td>
+                <td>{{ plan.order }}</td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'pricing_edit' plan.id %}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">✏️ Tahrirlash</a>
+                        <form method="POST" action="{% url 'pricing_delete' plan.id %}" style="display: inline;" onsubmit="return confirmDelete('Bu tarifni o\'chirmoqchimisiz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" style="text-align: center; color: #888; padding: 3rem;">Hozircha tariflar yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

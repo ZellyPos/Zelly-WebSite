@@ -1,0 +1,44 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Statistika{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'admin_stat_create' %}" class="btn btn-primary">+ Stat qo'shish</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Tartib</th>
+                <th>Label</th>
+                <th>Qiymat</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stat in stats %}
+            <tr>
+                <td><strong>#{{ stat.order }}</strong></td>
+                <td><strong>{{ stat.label }}</strong></td>
+                <td><strong>{{ stat.value }}</strong></td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'admin_stat_edit' stat.id %}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">✏️ Tahrirlash</a>
+                        <form method="POST" action="{% url 'admin_stat_delete' stat.id %}" style="display: inline;" onsubmit="return confirm('O\'chirmoqchimisiz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; color: #888; padding: 3rem;">Hozircha statistika yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

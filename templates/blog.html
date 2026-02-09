@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog - ZELLY Premium POS{% endblock %}
+
+{% block content %}
+<section class="premium-page-header">
+    <div class="section-label">Blog</div>
+    <h1 class="premium-title">Foydali Ma'lumotlar va Yangiliklar</h1>
+    <p class="section-description" style="max-width: 800px; margin: 0 auto; color: var(--text-gray);">Restoran biznesini rivojlantirish bo'yicha ekspert maslahatlari va ZELLY yangiliklari.</p>
+</section>
+
+<section class="blog-grid-section">
+    <div class="blog-container">
+        <div class="blog-layout">
+            {% for post in posts %}
+            <article class="blog-card" data-title="{{ post.title }}" data-content="{{ post.content|linebreaks }}" data-date="{{ post.date|date:'d-F, Y' }}" data-category="{{ post.category }}">
+                <div class="blog-image">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                    <div class="blog-placeholder-image">{{ post.emoji }}</div>
+                    {% endif %}
+                    <div class="blog-category">{{ post.category }}</div>
+                </div>
+                <div class="blog-body">
+                    <div class="blog-date">{{ post.date|date:"d-F, Y" }}</div>
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.short_description }}</p>
+                    <a href="javascript:void(0)" class="read-more" onclick="openBlogModal(this.closest('.blog-card'))">Davomini o'qish <span>→</span></a>
+                </div>
+            </article>
+            {% empty %}
+            <p>Hozircha blog postlar mavjud emas.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Blog Post Modal -->
+<div id="blogPostModal" class="modal">
+    <div class="modal-overlay" onclick="closeBlogModal()"></div>
+    <div class="modal-content blog-modal-content">
+        <button class="modal-close" onclick="closeBlogModal()">&times;</button>
+        <div class="blog-modal-body">
+            <div class="blog-date" id="modalBlogDate"></div>
+            <div class="blog-category" id="modalBlogCategory" style="position: static; display: inline-block; margin-bottom: 1rem;"></div>
+            <h2 id="modalBlogTitle" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--white); margin-bottom: 2rem;"></h2>
+            <div id="modalBlogContent" style="color: var(--text-gray); line-height: 1.8; font-size: 1.1rem;"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+.blog-modal-content {
+    max-width: 800px;
+    padding: 3rem;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+</style>
+
+<script>
+function openBlogModal(card) {
+    const modal = document.getElementById('blogPostModal');
+    const title = card.getAttribute('data-title');
+    const content = card.getAttribute('data-content');
+    const date = card.getAttribute('data-date');
+    const category = card.getAttribute('data-category');
+
+    document.getElementById('modalBlogTitle').innerText = title;
+    document.getElementById('modalBlogContent').innerHTML = content;
+    document.getElementById('modalBlogDate').innerText = date;
+    document.getElementById('modalBlogCategory').innerText = category;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBlogModal() {
+    const modal = document.getElementById('blogPostModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+</script>
+
+<section class="blog-newsletter">
+    <div class="newsletter-container">
+        <h2>Yangiliklarni O'tkazib Yubormang</h2>
+        <p>Haftalik foydali maqolalar va chegirmalarni birinchilardan bo'lib oling.</p>
+        <form class="cta-form" style="max-width: 600px; margin: 2rem auto;">
+            <input type="email" placeholder="Email manzilingiz" class="cta-input" required>
+            <button type="submit" class="cta-submit">Obuna Bo'lish</button>
+        </form>
+    </div>
+</section>
+
+<style>
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+.blog-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+.blog-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.blog-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.03);
+}
+.blog-image {
+    height: 240px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.blog-placeholder-image {
+    font-size: 5rem;
+}
+.blog-category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 0.5rem 1.2rem;
+    background: var(--gold);
+    color: var(--black);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.blog-body {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.blog-date {
+    color: var(--gold);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.blog-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+.blog-body p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+.read-more {
+    margin-top: auto;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+.read-more span {
+    transition: transform 0.3s ease;
+}
+.read-more:hover span {
+    transform: translateX(5px);
+}
+.blog-newsletter {
+    padding: 8rem 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+@media (max-width: 480px) {
+    .blog-layout { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}{% if action == 'create' %}Fikr qo'shish{% else %}Fikrni tahrirlash{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="author_name">Muallif ismi *</label>
+            <input type="text" id="author_name" name="author_name" value="{{ testimonial.author_name|default:'' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="author_position">Lavozim *</label>
+            <input type="text" id="author_position" name="author_position" value="{{ testimonial.author_position|default:'' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="text">Fikr matni *</label>
+            <textarea id="text" name="text" rows="5" required>{{ testimonial.text|default:'' }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="rating">Reyting (1-5) *</label>
+            <select id="rating" name="rating" required>
+                <option value="5" {% if testimonial.rating == 5 %}selected{% endif %}>⭐⭐⭐⭐⭐ (5)</option>
+                <option value="4" {% if testimonial.rating == 4 %}selected{% endif %}>⭐⭐⭐⭐ (4)</option>
+                <option value="3" {% if testimonial.rating == 3 %}selected{% endif %}>⭐⭐⭐ (3)</option>
+                <option value="2" {% if testimonial.rating == 2 %}selected{% endif %}>⭐⭐ (2)</option>
+                <option value="1" {% if testimonial.rating == 1 %}selected{% endif %}>⭐ (1)</option>
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+            <a href="{% url 'testimonials_list' %}" class="btn btn-secondary">← Bekor qilish</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

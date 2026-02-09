@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}So'rovlar{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ism</th>
+                <th>Telefon</th>
+                <th>Email</th>
+                <th>Tarif</th>
+                <th>Xabar</th>
+                <th>Sana</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td><strong>#{{ contact.id }}</strong></td>
+                <td><strong>{{ contact.name }}</strong></td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.email|default:"—" }}</td>
+                <td>
+                    {% if contact.plan %}
+                        <span class="badge">{{ contact.plan }}</span>
+                    {% else %}
+                        <span style="color: #888;">Umumiy</span>
+                    {% endif %}
+                </td>
+                <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    {{ contact.message|default:"—" }}
+                </td>
+                <td>{{ contact.created_at|date:"d.m.Y H:i" }}</td>
+                <td>
+                    <form method="POST" action="{% url 'contact_delete' contact.id %}" style="display: inline;" onsubmit="return confirmDelete('Bu so\'rovni o\'chirmoqchimisiz?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" style="text-align: center; color: #888; padding: 3rem;">Hozircha so'rovlar yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

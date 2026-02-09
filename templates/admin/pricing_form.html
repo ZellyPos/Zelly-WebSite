@@ -1,0 +1,90 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}{% if action == 'create' %}Tarif qo'shish{% else %}Tarifni tahrirlash{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">Tarif nomi *</label>
+            <input type="text" id="name" name="name" value="{{ plan.name|default:'' }}" required>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+                <label for="price">Narx *</label>
+                <input type="text" id="price" name="price" value="{{ plan.price|default:'' }}" required placeholder="masalan: 500,000">
+            </div>
+            
+            <div class="form-group">
+                <label for="period">Davr *</label>
+                <input type="text" id="period" name="period" value="{{ plan.period|default:'' }}" required placeholder="masalan: /oyiga">
+            </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+                <label for="button_text">Tugma matni *</label>
+                <input type="text" id="button_text" name="button_text" value="{{ plan.button_text|default:'' }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="order">Tartib raqami</label>
+                <input type="number" id="order" name="order" value="{{ plan.order|default:0 }}">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 0.8rem; cursor: pointer;">
+                <input type="checkbox" name="is_featured" {% if plan.is_featured %}checked{% endif %} style="width: auto; cursor: pointer;">
+                <span>Mashhur tarif sifatida belgilash</span>
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <label>Xususiyatlar</label>
+            <div id="features-container">
+                {% if plan %}
+                    {% for feature in plan.features.all %}
+                        <div class="feature-field-group" style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem;">
+                            <input type="text" name="features[]" value="{{ feature.text }}" style="flex: 1;" placeholder="Xususiyat matni">
+                            <button type="button" class="btn btn-danger" onclick="removeFeatureField(this)" style="padding: 0.5rem 1rem;">×</button>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="feature-field-group" style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem;">
+                        <input type="text" name="features[]" style="flex: 1;" placeholder="Xususiyat matni">
+                        <button type="button" class="btn btn-danger" onclick="removeFeatureField(this)" style="padding: 0.5rem 1rem;">×</button>
+                    </div>
+                {% endif %}
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addFeatureField()" style="margin-top: 0.5rem;">+ Xususiyat qo'shish</button>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+            <a href="{% url 'pricing_list' %}" class="btn btn-secondary">← Bekor qilish</a>
+        </div>
+    </form>
+</div>
+
+<script>
+function addFeatureField() {
+    const container = document.getElementById('features-container');
+    const fieldGroup = document.createElement('div');
+    fieldGroup.className = 'feature-field-group';
+    fieldGroup.style.cssText = 'display: flex; gap: 0.5rem; margin-bottom: 0.8rem;';
+    fieldGroup.innerHTML = `
+        <input type="text" name="features[]" style="flex: 1;" placeholder="Xususiyat matni">
+        <button type="button" class="btn btn-danger" onclick="removeFeatureField(this)" style="padding: 0.5rem 1rem;">×</button>
+    `;
+    container.appendChild(fieldGroup);
+}
+
+function removeFeatureField(button) {
+    button.parentElement.remove();
+}
+</script>
+{% endblock %}

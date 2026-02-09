@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Karyera - ZELLY Premium POS{% endblock %}
+
+{% block content %}
+<section class="premium-page-header">
+    <div class="section-label">Karyera</div>
+    <h1 class="premium-title">Kelajakni Birgalikda Quramiz</h1>
+    <p class="section-description" style="max-width: 800px; margin: 0 auto; color: var(--text-gray);">Biz doimiy ravishda o'z ishi uchun yonib yashaydigan, texnologiyalarni sevuvchi va yangiliklarga ochiq insonlarni jamoamizda kutamiz.</p>
+</section>
+
+<section class="careers-why-us">
+    <div class="section-header">
+        <h2 class="section-title">Nega ZELLY?</h2>
+    </div>
+    <div class="perks-grid">
+        <div class="perk-card">
+            <div class="perk-icon">🛋️</div>
+            <h3>Zamonaviy Ofis</h3>
+            <p>Toshkent markazida qulay va zamonaviy ish muhiti.</p>
+        </div>
+        <div class="perk-card">
+            <div class="perk-icon">📈</div>
+            <h3>O'sish Imkoniyati</h3>
+            <p>Doimiy treninglar, konferensiyalar va professionall o'sish.</p>
+        </div>
+        <div class="perk-card">
+            <div class="perk-icon">☕</div>
+            <h3>Kofe va Snacks</h3>
+            <p>Ofisda doimiy ravishda bepul kofe, choy va shirinliklar.</p>
+        </div>
+        <div class="perk-card">
+            <div class="perk-icon">⚖️</div>
+            <h3>Moslashuvchan Grafik</h3>
+            <p>Ish va hayot muvozanatini saqlash uchun moslashuvchan ish vaqti.</p>
+        </div>
+    </div>
+</section>
+
+<section class="open-positions">
+    <div class="section-header">
+        <div class="section-label">Bo'sh Ish O'rinlari</div>
+        <h2 class="section-title">Bizga Qo'shiling</h2>
+    </div>
+    <div class="jobs-container">
+        {% for job in jobs %}
+        <div class="job-card">
+            <div class="job-main">
+                <div class="job-info">
+                    <h3>{{ job.title }}</h3>
+                    <p>Texnologiyalar: {{ job.technologies }}</p>
+                </div>
+                <div class="job-tags">
+                    <span class="tag">{{ job.tags }}</span>
+                </div>
+            </div>
+            <button class="btn-secondary" onclick="openContactModal('Job: {{ job.title }}')">Ariza Berish</button>
+        </div>
+        {% empty %}
+        <div class="job-card">
+            <p>Hozircha bo'sh ish o'rinlari mavjud emas. Ammo biz doimo iqtidorli insonlarni qidiramiz!</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+.careers-why-us {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.perks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+.perk-card {
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.perk-card:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+.perk-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+.perk-card h3 {
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+.perk-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+.open-positions {
+    padding: 8rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+.jobs-container {
+    max-width: 900px;
+    margin: 4rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.job-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+.job-card:hover {
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.05);
+}
+.job-info h3 {
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+.job-info p {
+    color: var(--text-gray);
+    font-size: 1rem;
+}
+.job-tags {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+.tag {
+    padding: 0.4rem 1rem;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+@media (max-width: 768px) {
+    .job-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    .job-card button { width: 100%; }
+}
+</style>
+{% endblock %}

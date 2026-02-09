@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Biz Haqimizda - ZELLY Premium POS{% endblock %}
+
+{% block content %}
+<section class="premium-page-header">
+    <div class="section-label">Biz Haqimizda</div>
+    <h1 class="premium-title">Texnologiya orqali Biznesingizni Transformatsiya Qilamiz</h1>
+</section>
+
+<section class="about-content">
+    <div class="content-container">
+        <div class="about-grid">
+            <div class="about-text-block">
+                <h2>Bizning Missiyamiz</h2>
+                <p>ZELLY - bu shunchaki POS tizim emas, balki kafe va restoranlar uchun zamonaviy ekotizimdir. Bizning asosiy maqsadimiz - tadbirkorlarga o'z bizneslarini yanada samarali, shaffof va oson boshqarishda yordam berish.</p>
+                <p>Biz har bir mijozimizning ehtiyojlarini tushunishga va ularga eng zamonaviy texnologik yechimlarni taqdim etishga intilamiz. ZELLY bilan siz faqat texnika emas, balki ishonchli hamkorga ega bo'lasiz.</p>
+            </div>
+            <div class="about-visual-block">
+                <div class="stats-premium">
+                    {% for stat in stats %}
+                    <div class="stat-item-premium">
+                        <span class="stat-num">{{ stat.value }}</span>
+                        <span class="stat-desc">{{ stat.label }}</span>
+                    </div>
+                    {% empty %}
+                    <div class="stat-item-premium">
+                        <span class="stat-num">2023</span>
+                        <span class="stat-desc">Tashkil topgan yil</span>
+                    </div>
+                    <div class="stat-item-premium">
+                        <span class="stat-num">500+</span>
+                        <span class="stat-desc">Mamnun mijozlar</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="values-section">
+    <div class="section-header">
+        <div class="section-label">Qadriyatlarimiz</div>
+        <h2 class="section-title">Biz Nimalarga Ishonamiz?</h2>
+    </div>
+    <div class="values-grid">
+        <div class="value-card">
+            <div class="value-icon">💎</div>
+            <h3>Sifat</h3>
+            <p>Biz har doim eng yuqori sifatli mahsulot va xizmatni taqdim etishga intilamiz.</p>
+        </div>
+        <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <h3>Ishonch</h3>
+            <p>Mijozlarimiz bilan uzoq muddatli va ishonchli munosabatlar o'rnatamiz.</p>
+        </div>
+        <div class="value-card">
+            <div class="value-icon">⚡</div>
+            <h3>Innovatsiya</h3>
+            <p>Doimiy rivojlanish va yangi texnologiyalarni tatbiq etish bizning qonimizda.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.premium-page-header {
+    padding: 12rem 2rem 6rem;
+    text-align: center;
+    background: radial-gradient(circle at top, rgba(212, 175, 55, 0.15), transparent 70%);
+}
+.premium-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 800;
+    max-width: 900px;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, var(--white), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+.about-content {
+    padding: 6rem 2rem;
+}
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.about-text-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 2rem;
+}
+.about-text-block p {
+    font-size: 1.15rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+.stats-premium {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+.stat-item-premium {
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.stat-item-premium:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+.stat-num {
+    display: block;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+.stat-desc {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+}
+.values-section {
+    padding: 8rem 2rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 4rem auto 0;
+}
+.value-card {
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.value-card:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: var(--gold);
+    transform: translateY(-10px);
+}
+.value-icon {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.value-card h3 {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+.value-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+@media (max-width: 968px) {
+    .premium-title { font-size: 3rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}

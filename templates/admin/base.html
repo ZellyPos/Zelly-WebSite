@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ZELLY Admin{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'admin/admin.css' %}">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">ZELLY</div>
+                <div class="logo-subtitle">Admin Panel</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="{% url 'admin_dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{% url 'partners_list' %}" class="nav-item {% if 'partners' in request.path %}active{% endif %}">
+                    <span class="icon">🤝</span>
+                    <span>Hamkorlar</span>
+                </a>
+                <a href="{% url 'testimonials_list' %}" class="nav-item {% if 'testimonials' in request.path %}active{% endif %}">
+                    <span class="icon">💬</span>
+                    <span>Fikrlar</span>
+                </a>
+                <a href="{% url 'pricing_list' %}" class="nav-item {% if 'pricing' in request.path %}active{% endif %}">
+                    <span class="icon">💰</span>
+                    <span>Tariflar</span>
+                </a>
+                <a href="{% url 'contacts_list' %}" class="nav-item {% if 'contacts' in request.path %}active{% endif %}">
+                    <span class="icon">📧</span>
+                    <span>So'rovlar</span>
+                </a>
+                <a href="{% url 'admin_stats_list' %}" class="nav-item {% if 'stats' in request.path %}active{% endif %}">
+                    <span class="icon">📈</span>
+                    <span>Statistika</span>
+                </a>
+                <a href="{% url 'admin_team_list' %}" class="nav-item {% if 'team' in request.path %}active{% endif %}">
+                    <span class="icon">👥</span>
+                    <span>Jamoa</span>
+                </a>
+                <a href="{% url 'admin_jobs_list' %}" class="nav-item {% if 'jobs' in request.path %}active{% endif %}">
+                    <span class="icon">💼</span>
+                    <span>Karyera</span>
+                </a>
+                <a href="{% url 'admin_blog_list' %}" class="nav-item {% if 'blog' in request.path %}active{% endif %}">
+                    <span class="icon">📝</span>
+                    <span>Blog</span>
+                </a>
+                <a href="{% url 'admin_settings_list' %}" class="nav-item {% if 'settings' in request.path %}active{% endif %}">
+                    <span class="icon">⚙️</span>
+                    <span>Sozlamalar</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">{{ request.user.username|first|upper }}</div>
+                    <div class="user-details">
+                        <div class="user-name">{{ request.user.username }}</div>
+                        <div class="user-role">Administrator</div>
+                    </div>
+                </div>
+                <a href="{% url 'admin_logout' %}" class="logout-btn">Chiqish</a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                <div class="header-actions">
+                    {% block header_actions %}{% endblock %}
+                </div>
+            </header>
+            
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div class="content-body">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+    
+    <script src="{% static 'admin/admin.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Fikrlar{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'testimonial_create' %}" class="btn btn-primary">+ Fikr qo'shish</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Muallif</th>
+                <th>Lavozim</th>
+                <th>Reyting</th>
+                <th>Matn</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for testimonial in testimonials %}
+            <tr>
+                <td><strong>#{{ testimonial.id }}</strong></td>
+                <td><strong>{{ testimonial.author_name }}</strong></td>
+                <td>{{ testimonial.author_position }}</td>
+                <td>
+                    <span style="color: var(--gold);">
+                        {% for i in "12345"|slice:":"|make_list %}
+                            {% if forloop.counter <= testimonial.rating %}★{% else %}☆{% endif %}
+                        {% endfor %}
+                    </span>
+                </td>
+                <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ testimonial.text }}</td>
+                <td>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'testimonial_edit' testimonial.id %}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">✏️ Tahrirlash</a>
+                        <form method="POST" action="{% url 'testimonial_delete' testimonial.id %}" style="display: inline;" onsubmit="return confirmDelete('Bu fikrni o\'chirmoqchimisiz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ O'chirish</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center; color: #888; padding: 3rem;">Hozircha fikrlar yo'q</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
