@@ -4,163 +4,191 @@
 {% block title %}ZELLY - Premium POS Tizim | Kafe va Restoranlar Uchun{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 hero-text">
                 <h1>Biznesingizni Keyingi Bosqichga Olib Chiqing</h1>
-                <p class="subtitle">ZELLY - kafe va restoranlar uchun zamonaviy POS tizim. Buyurtmalarni boshqaring, to'lovlarni qabul qiling, inventarni nazorat qiling va biznesingizni o'sishini kuzating.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" onclick="openContactModal('Business')">Bepul Boshlash</button>
-                    <button class="btn-secondary" onclick="openVideoModal('{{ site_settings.youtube_id }}')"><span>▶️</span> Qanday Ishlaydi?</button>
+                <p class="subtitle">ZELLY - kafe va restoranlar uchun zamonaviy POS tizim. Buyurtmalarni boshqaring,
+                    to'lovlarni qabul qiling, inventarni nazorat qiling va biznesingizni o'sishini kuzating.</p>
+                <div class="hero-buttons d-flex gap-3 flex-wrap">
+                    <button class="btn btn-primary" onclick="openContactModal('Business')">Bepul Boshlash</button>
+                    <button class="btn btn-secondary"
+                        onclick="openVideoModal('{{ site_settings.youtube_id }}')"><span>▶️</span> Qanday
+                        Ishlaydi?</button>
                 </div>
-                <p class="trial-text" style="color: var(--gold); margin-top: 1.5rem; font-weight: 500; font-size: 0.9rem; opacity: 0.9; display: flex; align-items: center; gap: 0.5rem; animation: fadeInUp 1s ease 0.6s backwards;">
-                    <span style="font-size: 1.2rem;">✨</span> 14 kunlik bepul sinov davri. Kredit karta talab qilinmaydi.
+                <p class="trial-text">
+                    <span>✨</span> 14 kunlik bepul sinov davri. Kredit karta talab qilinmaydi.
                 </p>
             </div>
-            <div class="hero-visual">
+            <div class="col-lg-6 hero-visual">
                 <div class="mockup-container">
                     <div class="mockup-screen">
                         <div class="mockup-header">
                             <div class="mockup-title">Bugungi Natijalar</div>
                             <div style="color: var(--gold); font-weight: 600;">Live</div>
                         </div>
-                        <div class="mockup-stats">
-                            <div class="stat-card">
-                                <div class="stat-value">127</div>
-                                <div class="stat-label">Buyurtmalar</div>
+                        <div class="row g-3 mockup-stats">
+                            <div class="col-4">
+                                <div class="stat-card">
+                                    <div class="stat-value">127</div>
+                                    <div class="stat-label">Buyurtmalar</div>
+                                </div>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-value">8.5M</div>
-                                <div class="stat-label">Savdo</div>
+                            <div class="col-4">
+                                <div class="stat-card">
+                                    <div class="stat-value">8.5M</div>
+                                    <div class="stat-label">Savdo</div>
+                                </div>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-value">94%</div>
-                                <div class="stat-label">Qoniqish</div>
+                            <div class="col-4">
+                                <div class="stat-card">
+                                    <div class="stat-value">94%</div>
+                                    <div class="stat-label">Qoniqish</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-header">
+<!-- Features Section -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-header text-center mx-auto">
             <div class="section-label">Imkoniyatlar</div>
             <h2 class="section-title">Barcha Kerakli Vositalar Bir Joyda</h2>
-            <p class="section-description">ZELLY biznesingizni boshqarish uchun zarur bo'lgan barcha vositalarni taqdim etadi</p>
+            <p class="section-description">ZELLY biznesingizni boshqarish uchun zarur bo'lgan barcha vositalarni taqdim
+                etadi</p>
         </div>
-        <div class="features-slider-container">
+        <div class="position-relative">
             <button class="features-arrow prev" onclick="slideFeatures(-1)">&#10094;</button>
-            <div class="features-slider-wrapper">
-                <div class="features-grid">
+            <div class="features-slider-wrapper overflow-hidden">
+                <div class="features-grid d-flex">
                     <div class="feature-card">
                         <div class="feature-icon">🚀</div>
                         <h3 class="feature-title">Tezkor Xizmat</h3>
-                        <p class="feature-description">Buyurtmalarni bir necha soniya ichida qabul qiling va oshxonaga yuboring.</p>
+                        <p class="feature-description">Buyurtmalarni bir necha soniya ichida qabul qiling va oshxonaga
+                            yuboring.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">📊</div>
                         <h3 class="feature-title">Aniq Hisobot</h3>
-                        <p class="feature-description">Sotuvlar, foyda va xarajatlar bo'yicha real vaqtdagi batafsil tahlillarni oling.</p>
+                        <p class="feature-description">Sotuvlar, foyda va xarajatlar bo'yicha real vaqtdagi batafsil
+                            tahlillarni oling.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">📱</div>
                         <h3 class="feature-title">QR Menyu</h3>
-                        <p class="feature-description">Mijozlar telefonlari orqali menyuni ko'rib, oson buyurtma berishlari mumkin.</p>
+                        <p class="feature-description">Mijozlar telefonlari orqali menyuni ko'rib, oson buyurtma
+                            berishlari mumkin.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">👨‍🍳</div>
                         <h3 class="feature-title">Oshxona Nazorati</h3>
-                        <p class="feature-description">Oshpazlar uchun maxsus ekran orqali buyurtmalar navbatini boshqaring.</p>
+                        <p class="feature-description">Oshpazlar uchun maxsus ekran orqali buyurtmalar navbatini
+                            boshqaring.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">💰</div>
                         <h3 class="feature-title">Xarajatlar Nazorati</h3>
-                        <p class="feature-description">Balla xarajatlarni tizimda hisoblab boring va moliyani boshqaring.</p>
+                        <p class="feature-description">Balla xarajatlarni tizimda hisoblab boring va moliyani
+                            boshqaring.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎨</div>
                         <h3 class="feature-title">Brendingiz Uchun</h3>
-                        <p class="feature-description">Tizimni o'z brendingizga moslab sozlang va mijozlar ishonchini qozoning.</p>
+                        <p class="feature-description">Tizimni o'z brendingizga moslab sozlang va mijozlar ishonchini
+                            qozoning.</p>
                     </div>
                 </div>
             </div>
             <button class="features-arrow next" onclick="slideFeatures(1)">&#10095;</button>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
-        <div class="section-header">
+<!-- Benefits Section -->
+<section class="benefits" id="benefits">
+    <div class="container">
+        <div class="section-header text-center mx-auto">
             <div class="section-label">Afzalliklar</div>
             <h2 class="section-title">Nega Aynan ZELLY?</h2>
             <p class="section-description">Biznesingizni yangi bosqichga olib chiqadigan afzalliklar</p>
         </div>
-        <div class="benefits-container">
-            <div class="benefits-visual">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
                 <div class="benefit-showcase">
                     <div class="benefit-chart">
-                        <div class="chart-bars">
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
+                        <div class="d-flex align-items-end chart-bars" style="height: 200px;">
+                            <div class="chart-bar flex-fill"></div>
+                            <div class="chart-bar flex-fill"></div>
+                            <div class="chart-bar flex-fill"></div>
+                            <div class="chart-bar flex-fill"></div>
                         </div>
                     </div>
-                    <div style="text-align: center; color: var(--text-gray); font-size: 0.95rem;">
+                    <div class="text-center text-muted">
                         Oyma-oy daromad o'sishi
                     </div>
                 </div>
             </div>
-            <div class="benefits-list">
-                <div class="benefit-item">
-                    <div class="benefit-number">01</div>
-                    <div class="benefit-content">
-                        <h3>Vaqt Tejash</h3>
-                        <p>Avtomatlashtirish orqali kuniga 3-4 soat vaqt tejang. Xodimlaringiz muhimroq ishlarga e'tibor qaratsin.</p>
+            <div class="col-lg-6">
+                <div class="benefits-list">
+                    <div class="benefit-item d-flex gap-3">
+                        <div class="benefit-number">01</div>
+                        <div class="benefit-content">
+                            <h3>Vaqt Tejash</h3>
+                            <p>Avtomatlashtirish orqali kuniga 3-4 soat vaqt tejang. Xodimlaringiz muhimroq ishlarga
+                                e'tibor qaratsin.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-number">02</div>
-                    <div class="benefit-content">
-                        <h3>Xatolarni Kamaytirish</h3>
-                        <p>Qo'lda kiritish xatolari 95% ga kamayadi. Aniq hisoblar va hisobotlar.</p>
+                    <div class="benefit-item d-flex gap-3">
+                        <div class="benefit-number">02</div>
+                        <div class="benefit-content">
+                            <h3>Xatolarni Kamaytirish</h3>
+                            <p>Qo'lda kiritish xatolari 95% ga kamayadi. Aniq hisoblar va hisobotlar.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-number">03</div>
-                    <div class="benefit-content">
-                        <h3>Daromadni Oshirish</h3>
-                        <p>O'rtacha 25-30% daromad o'sishiga erishgan mijozlarimiz. Samarali boshqaruv orqali ko'proq daromad oling.</p>
+                    <div class="benefit-item d-flex gap-3">
+                        <div class="benefit-number">03</div>
+                        <div class="benefit-content">
+                            <h3>Daromadni Oshirish</h3>
+                            <p>O'rtacha 25-30% daromad o'sishiga erishgan mijozlarimiz. Samarali boshqaruv orqali
+                                ko'proq daromad oling.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-number">04</div>
-                    <div class="benefit-content">
-                        <h3>Boshqaruv Osonlashuvi</h3>
-                        <p>Bir necha bosish bilan barcha jarayonlarni nazorat qiling. Har yerdan biznesingizni boshqaring.</p>
+                    <div class="benefit-item d-flex gap-3">
+                        <div class="benefit-number">04</div>
+                        <div class="benefit-content">
+                            <h3>Boshqaruv Osonlashuvi</h3>
+                            <p>Bir necha bosish bilan barcha jarayonlarni nazorat qiling. Har yerdan biznesingizni
+                                boshqaring.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Partners Section -->
-    <section class="partners" id="partners">
-        <div class="section-header">
+<!-- Partners Section -->
+<section class="partners" id="partners">
+    <div class="container">
+        <div class="section-header text-center mx-auto">
             <div class="section-label">Hamkorlar</div>
             <h2 class="section-title">Bizga Ishongan Brendlar</h2>
             <p class="section-description">O'zbekistonning yetakchi kafe va restoranlari ZELLY dan foydalanmoqda</p>
         </div>
-        <div class="partners-slider-wrapper">
-            <div class="partners-slider">
+        <div class="partners-slider-wrapper overflow-hidden">
+            <div class="partners-slider d-flex">
                 {% for partner in partners %}
                 <div class="partner-logo">
                     {% if partner.logo %}
-                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="img-fluid">
                     {% else %}
                     <div class="partner-placeholder">{{ partner.name }}</div>
                     {% endif %}
@@ -170,12 +198,12 @@
                     <div class="partner-placeholder">HAMKORLAR</div>
                 </div>
                 {% endfor %}
-                
+
                 {% if partners %}
                 {% for partner in partners %}
                 <div class="partner-logo">
                     {% if partner.logo %}
-                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="img-fluid">
                     {% else %}
                     <div class="partner-placeholder">{{ partner.name }}</div>
                     {% endif %}
@@ -184,25 +212,28 @@
                 {% endif %}
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-header">
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header text-center mx-auto">
             <div class="section-label">Mijozlar Fikri</div>
             <h2 class="section-title">Mijozlarimiz Nima Deydi?</h2>
             <p class="section-description">ZELLY bilan ishlayotgan biznes egalarining fikrlari</p>
         </div>
-        <div class="testimonials-slider-container">
+        <div class="position-relative">
             <button class="slider-arrow slider-arrow-left" onclick="slideTestimonials(-1)">‹</button>
-            <div class="testimonials-slider-wrapper">
-                <div class="testimonials-slider">
+            <div class="testimonials-slider-wrapper overflow-hidden">
+                <div class="testimonials-slider d-flex">
                     {% for testimonial in testimonials %}
                     <div class="testimonial-card">
                         <p class="testimonial-text">{{ testimonial.text }}</p>
-                        <div class="testimonial-author">
+                        <div class="testimonial-author d-flex align-items-center gap-3">
                             {% if testimonial.avatar %}
-                            <img src="{{ testimonial.avatar.url }}" alt="{{ testimonial.author_name }}" class="author-avatar">
+                            <img src="{{ testimonial.avatar.url }}" alt="{{ testimonial.author_name }}"
+                                class="author-avatar">
                             {% else %}
                             <div class="author-avatar">{{ testimonial.avatar_initials }}</div>
                             {% endif %}
@@ -212,7 +243,8 @@
                             </div>
                         </div>
                         <div class="rating">
-                            {% if testimonial.rating == 5 %}★★★★★{% elif testimonial.rating == 4 %}★★★★{% elif testimonial.rating == 3 %}★★★{% elif testimonial.rating == 2 %}★★{% else %}★{% endif %}
+                            {% if testimonial.rating == 5 %}★★★★★{% elif testimonial.rating == 4 %}★★★★{% elif
+                            testimonial.rating == 3 %}★★★{% elif testimonial.rating == 2 %}★★{% else %}★{% endif %}
                         </div>
                     </div>
                     {% empty %}
@@ -224,112 +256,165 @@
             </div>
             <button class="slider-arrow slider-arrow-right" onclick="slideTestimonials(1)">›</button>
         </div>
-        <div class="slider-dots" id="testimonialDots"></div>
-    </section>
+        <div class="slider-dots mt-4" id="testimonialDots"></div>
+    </div>
+</section>
 
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="section-header">
+<!-- FAQ Section -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="section-header text-center mx-auto">
             <div class="section-label">Savol-Javoblar</div>
             <h2 class="section-title">Tez-Tez So'raladigan Savollar</h2>
             <p class="section-description">ZELLY haqida eng ko'p beriladigan savollar va javoblar</p>
         </div>
-        <div class="faq-container">
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>ZELLY ni o'rnatish qancha vaqt oladi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>ZELLY ni o'rnatish va sozlash juda oson va tez. O'rtacha 2-3 soat ichida to'liq ishga tushirishingiz mumkin. Bizning mutaxassislarimiz sizga bepul o'rnatish va o'rgatish xizmatini taqdim etadi.</p>
+        <div class="accordion faq-container" id="faqAccordion">
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button faq-question" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq1">
+                        ZELLY ni o'rnatish qancha vaqt oladi?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-answer">
+                        ZELLY ni o'rnatish va sozlash juda oson va tez. O'rtacha 2-3 soat ichida to'liq ishga
+                        tushirishingiz mumkin. Bizning mutaxassislarimiz sizga bepul o'rnatish va o'rgatish xizmatini
+                        taqdim etadi.
+                    </div>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Qanday to'lov usullarini qo'llab-quvvatlaysiz?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>ZELLY barcha mashhur to'lov usullarini qo'llab-quvvatlaydi: naqd pul, bank kartalari (Visa, Mastercard, Humo, UzCard), Payme, Click, Apelsin va boshqa O'zbekistonda qo'llaniladigan to'lov tizimlari.</p>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq2">
+                        Qanday to'lov usullarini qo'llab-quvvatlaysiz?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-answer">
+                        ZELLY barcha mashhur to'lov usullarini qo'llab-quvvatlaydi: naqd pul, bank kartalari (Visa,
+                        Mastercard, Humo, UzCard), Payme, Click, Apelsin va boshqa O'zbekistonda qo'llaniladigan to'lov
+                        tizimlari.
+                    </div>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Ma'lumotlarim xavfsizmi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Ha, mutlaqo xavfsiz! Barcha ma'lumotlar shifrlangan holda saqlanadi va zamonaviy xavfsizlik standartlariga mos keladi. Muntazam backup olish orqali ma'lumotlarni yo'qotish xavfi 0%.</p>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq3">
+                        Ma'lumotlarim xavfsizmi?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-answer">
+                        Ha, mutlaqo xavfsiz! Barcha ma'lumotlar shifrlangan holda saqlanadi va zamonaviy xavfsizlik
+                        standartlariga mos keladi. Muntazam backup olish orqali ma'lumotlarni yo'qotish xavfi 0%.
+                    </div>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Offline rejimda ishlay oladimi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Ha! ZELLY offline rejimda ham to'liq ishlaydi. Internet aloqasi uzilgan taqdirda ham buyurtmalarni qabul qilishingiz va keyinchalik sinxronlashingiz mumkin.</p>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq4">
+                        Offline rejimda ishlay oladimi?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-answer">
+                        Ha! ZELLY offline rejimda ham to'liq ishlaydi. Internet aloqasi uzilgan taqdirda ham
+                        buyurtmalarni qabul qilishingiz va keyinchalik sinxronlashingiz mumkin.
+                    </div>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Bepul sinov muddati bormi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Albatta! Biz 14 kunlik to'liq funksional bepul sinov muddatini taqdim etamiz. Hech qanday kredit karta ma'lumoti talab qilinmaydi. Sinov davrida barcha premium funksiyalardan foydalanishingiz mumkin.</p>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq5">
+                        Bepul sinov muddati bormi?
+                    </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-answer">
+                        Albatta! Biz 14 kunlik to'liq funksional bepul sinov muddatini taqdim etamiz. Hech qanday kredit
+                        karta ma'lumoti talab qilinmaydi. Sinov davrida barcha premium funksiyalardan foydalanishingiz
+                        mumkin.
+                    </div>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Qo'llab-quvvatlash xizmati qanday ishlaydi?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Bizda 24/7 qo'llab-quvvatlash xizmati mavjud (Business va Enterprise tarif rejalarida). Telefon, email va onlayn chat orqali bizga murojaat qilishingiz mumkin. O'rtacha javob vaqti 15 daqiqa.</p>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq6">
+                        Qo'llab-quvvatlash xizmati qanday ishlaydi?
+                    </button>
+                </h2>
+                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-answer">
+                        Bizda 24/7 qo'llab-quvvatlash xizmati mavjud (Business va Enterprise tarif rejalarida). Telefon,
+                        email va onlayn chat orqali bizga murojaat qilishingiz mumkin. O'rtacha javob vaqti 15 daqiqa.
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="section-header">
+<!-- Pricing Section -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-header text-center mx-auto">
             <div class="section-label">Narxlar</div>
             <h2 class="section-title">Biznesingizga Mos Tarif Tanlang</h2>
             <p class="section-description">Shaffof narxlar va yashirin to'lovlarsiz</p>
         </div>
-        <div class="pricing-grid">
+        <div class="row g-4">
             {% for plan in pricing_plans %}
-            <div class="pricing-card {% if plan.is_featured %}featured{% endif %}">
-                <div class="pricing-header">
-                    <div class="pricing-plan">{{ plan.name|upper }}</div>
-                    <div class="pricing-price">{{ plan.price }}{% if plan.period %} <span>{{ plan.period }}</span>{% endif %}</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card pricing-card h-100 {% if plan.is_featured %}featured{% endif %}">
+                    <div class="card-body d-flex flex-column">
+                        <div class="pricing-header">
+                            <div class="pricing-plan">{{ plan.name|upper }}</div>
+                            <div class="pricing-price">{{ plan.price }}{% if plan.period %} <span>{{ plan.period
+                                    }}</span>{% endif %}</div>
+                        </div>
+                        <ul class="pricing-features list-unstyled flex-grow-1">
+                            {% for feature in plan.features.all %}
+                            <li>{{ feature.text }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button class="btn pricing-btn w-100 mt-auto" onclick="openContactModal('{{ plan.name }}')">{{
+                            plan.button_text }}</button>
+                    </div>
                 </div>
-                <ul class="pricing-features">
-                    {% for feature in plan.features.all %}
-                    <li>{{ feature.text }}</li>
-                    {% endfor %}
-                </ul>
-                <button class="pricing-btn" onclick="openContactModal('{{ plan.name }}')">{{ plan.button_text }}</button>
             </div>
             {% empty %}
-            <p>Tariflar hozircha mavjud emas.</p>
+            <p class="text-center">Tariflar hozircha mavjud emas.</p>
             {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-container">
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-container text-center">
             <h2>Bugun ZELLY bilan Boshlang</h2>
             <p>14 kunlik bepul sinov davri. Kredit karta talab qilinmaydi.</p>
-            <form class="cta-form" action="{% url 'contact' %}" method="POST">
+            <form class="cta-form row g-3 justify-content-center" action="{% url 'contact' %}" method="POST">
                 {% csrf_token %}
-                <input type="text" name="name" class="cta-input" placeholder="Ismingiz" required>
-                <input type="tel" name="phone" class="cta-input" placeholder="Telefon raqamingiz" required>
-                <button type="submit" class="cta-submit">Yuborish</button>
+                <div class="col-md-4">
+                    <input type="text" name="name" class="form-control cta-input" placeholder="Ismingiz" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="tel" name="phone" class="form-control cta-input" placeholder="Telefon raqamingiz"
+                        required>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn cta-submit w-100">Yuborish</button>
+                </div>
             </form>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

@@ -101,35 +101,30 @@ function updateTestimonialDots() {
     });
 }
 
-// FAQ Toggle
+// FAQ Toggle - Now handled by Bootstrap Accordion
 function toggleFAQ(button) {
-    const faqItem = button.parentElement;
-    if (!faqItem) return;
-    const isActive = faqItem.classList.contains('active');
-
-    // Close all FAQ items
-    document.querySelectorAll('.faq-item').forEach(item => {
-        item.classList.remove('active');
-    });
-
-    // Open clicked item if it wasn't active
-    if (!isActive) {
-        faqItem.classList.add('active');
-    }
+    // This function is kept for backward compatibility
+    // Bootstrap accordion handles this automatically
+    console.log('FAQ toggle - handled by Bootstrap');
 }
 
 // Video Modal Functions
 function openVideoModal(videoId = null) {
     console.log('Attempting to open video modal...');
-    const modal = document.getElementById('videoModal');
+    const modalEl = document.getElementById('videoModal');
     const iframe = document.getElementById('youtubeVideo');
-    if (modal && iframe) {
+    if (modalEl && iframe) {
         const vid = videoId || YOUTUBE_VIDEO_ID;
         const origin = window.location.origin;
         iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&enablejsapi=1&origin=${origin}`;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
         console.log('Modal opened successfully with ID:', vid);
+
+        // Clear iframe when modal is hidden
+        modalEl.addEventListener('hidden.bs.modal', function () {
+            iframe.src = '';
+        });
     } else {
         console.error('Video modal or iframe not found in DOM!');
         alert('Texnik nosozlik: Video modal topilmadi. Sahifani qayta yuklab ko\'ring.');
@@ -138,34 +133,36 @@ function openVideoModal(videoId = null) {
 
 function closeVideoModal() {
     console.log('Closing video modal...');
-    const modal = document.getElementById('videoModal');
-    const iframe = document.getElementById('youtubeVideo');
-    if (modal && iframe) {
-        iframe.src = '';
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+    const modalEl = document.getElementById('videoModal');
+    if (modalEl) {
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) {
+            modal.hide();
+        }
     }
 }
 
 // Contact Modal Functions
 function openContactModal(plan = '') {
     console.log('Opening contact modal for plan:', plan);
-    const modal = document.getElementById('contactModal');
+    const modalEl = document.getElementById('contactModal');
     const planSelect = document.getElementById('contactPlan');
-    if (modal) {
+    if (modalEl) {
         if (planSelect && plan) planSelect.value = plan;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
     } else {
         console.error('Contact modal not found!');
     }
 }
 
 function closeContactModal() {
-    const modal = document.getElementById('contactModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+    const modalEl = document.getElementById('contactModal');
+    if (modalEl) {
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) {
+            modal.hide();
+        }
         const form = document.querySelector('.contact-form');
         if (form) form.reset();
     }
@@ -264,4 +261,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             console.warn('Invalid selector for smooth scroll:', href);
         }
     });
+});
+
+// Mobile navbar auto-close
+document.addEventListener('DOMContentLoaded', function () {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (navbarCollapse) {
+        // Close navbar when clicking on a nav link (mobile only)
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                // Check if navbar is expanded (mobile view)
+                if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: false
+                    });
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // Close navbar when clicking outside (mobile only)
+        document.addEventListener('click', function (event) {
+            const navbar = document.querySelector('.navbar');
+            const isClickInside = navbar.contains(event.target);
+
+            if (!isClickInside && window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            }
+        });
+    }
 });

@@ -1,30 +1,61 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ZELLY - Premium POS Tizim{% endblock %}</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{% url 'index' %}" class="logo">ZELLY</a>
-            <ul class="nav-links">
-                <li><a href="{% if request.resolver_match.url_name == 'index' %}#features{% else %}{% url 'index' %}#features{% endif %}">Imkoniyatlar</a></li>
-                <li><a href="{% if request.resolver_match.url_name == 'index' %}#benefits{% else %}{% url 'index' %}#benefits{% endif %}">Afzalliklar</a></li>
-                <li><a href="{% if request.resolver_match.url_name == 'index' %}#partners{% else %}{% url 'index' %}#partners{% endif %}">Hamkorlar</a></li>
-                <li><a href="{% if request.resolver_match.url_name == 'index' %}#testimonials{% else %}{% url 'index' %}#testimonials{% endif %}">Fikrlar</a></li>
-                <li><a href="{% if request.resolver_match.url_name == 'index' %}#faq{% else %}{% url 'index' %}#faq{% endif %}">FAQ</a></li>
-                <li><a href="{% if request.resolver_match.url_name == 'index' %}#pricing{% else %}{% url 'index' %}#pricing{% endif %}">Narxlar</a></li>
-            </ul>
-            <button class="cta-btn" onclick="openVideoModal('{{ site_settings.youtube_id }}')">Demo Ko'rish</button>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-5">
+            <a href="{% url 'index' %}" class="navbar-brand logo">ZELLY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto nav-links">
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% if request.resolver_match.url_name == 'index' %}#features{% else %}{% url 'index' %}#features{% endif %}">Imkoniyatlar</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% if request.resolver_match.url_name == 'index' %}#benefits{% else %}{% url 'index' %}#benefits{% endif %}">Afzalliklar</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% if request.resolver_match.url_name == 'index' %}#partners{% else %}{% url 'index' %}#partners{% endif %}">Hamkorlar</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% if request.resolver_match.url_name == 'index' %}#testimonials{% else %}{% url 'index' %}#testimonials{% endif %}">Fikrlar</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% if request.resolver_match.url_name == 'index' %}#faq{% else %}{% url 'index' %}#faq{% endif %}">FAQ</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% if request.resolver_match.url_name == 'index' %}#pricing{% else %}{% url 'index' %}#pricing{% endif %}">Narxlar</a>
+                    </li>
+                </ul>
+                <button class="btn cta-btn" onclick="openVideoModal('{{ site_settings.youtube_id }}')">Demo
+                    Ko'rish</button>
+            </div>
         </div>
     </nav>
 
@@ -33,100 +64,128 @@
     </main>
 
     <!-- Video Modal -->
-    <div id="videoModal" class="modal">
-        <div class="modal-overlay" onclick="closeVideoModal()"></div>
-        <div class="modal-content video-modal-content">
-            <button class="modal-close" onclick="closeVideoModal()">&times;</button>
-            <div class="video-container">
-                <iframe id="youtubeVideo" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content video-modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="youtubeVideo" src=""
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-overlay" onclick="closeContactModal()"></div>
-        <div class="modal-content contact-modal-content">
-            <button class="modal-close" onclick="closeContactModal()">&times;</button>
-            <div class="contact-modal-header">
-                <h2>Bog'lanish</h2>
-                <p>Ma'lumotlaringizni qoldiring, tez orada siz bilan bog'lanamiz</p>
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content contact-modal-content">
+                <div class="modal-header border-0">
+                    <div class="contact-modal-header w-100">
+                        <h2 class="modal-title" id="contactModalLabel">Bog'lanish</h2>
+                        <p class="text-muted">Ma'lumotlaringizni qoldiring, tez orada siz bilan bog'lanamiz</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="contact-form" action="{% url 'contact' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Ismingiz *</label>
+                            <input type="text" class="form-control" id="contactName" name="name" required
+                                placeholder="To'liq ismingizni kiriting">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactPhone" class="form-label">Telefon raqamingiz *</label>
+                            <input type="tel" class="form-control" id="contactPhone" name="phone" required
+                                placeholder="+998 90 123 45 67">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactPlan" class="form-label">Tarif rejasi *</label>
+                            <select class="form-select" id="contactPlan" name="plan" required>
+                                <option value="">Tanlang...</option>
+                                {% for plan in pricing_plans %}
+                                <option value="{{ plan.name }}">{{ plan.name }} - {{ plan.price }}{{ plan.period }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactMessage" class="form-label">Qo'shimcha ma'lumot (ixtiyoriy)</label>
+                            <textarea class="form-control" id="contactMessage" name="message" rows="4"
+                                placeholder="Savollaringiz yoki qo'shimcha ma'lumotlar..."></textarea>
+                        </div>
+                        <button type="submit" class="btn form-submit-btn w-100">Yuborish</button>
+                    </form>
+                </div>
             </div>
-            <form class="contact-form" action="{% url 'contact' %}" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="contactName">Ismingiz *</label>
-                    <input type="text" id="contactName" name="name" required placeholder="To'liq ismingizni kiriting">
-                </div>
-                <div class="form-group">
-                    <label for="contactPhone">Telefon raqamingiz *</label>
-                    <input type="tel" id="contactPhone" name="phone" required placeholder="+998 90 123 45 67">
-                </div>
-                <div class="form-group">
-                    <label for="contactPlan">Tarif rejasi *</label>
-                    <select id="contactPlan" name="plan" required>
-                        <option value="">Tanlang...</option>
-                        {% for plan in pricing_plans %}
-                        <option value="{{ plan.name }}">{{ plan.name }} - {{ plan.price }}{{ plan.period }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="contactMessage">Qo'shimcha ma'lumot (ixtiyoriy)</label>
-                    <textarea id="contactMessage" name="message" rows="4" placeholder="Savollaringiz yoki qo'shimcha ma'lumotlar..."></textarea>
-                </div>
-                <button type="submit" class="form-submit-btn">Yuborish</button>
-            </form>
         </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-container">
-            <div>
-                <div class="footer-brand">ZELLY</div>
-                <p class="footer-description">Kafe va restoranlar uchun zamonaviy POS tizim. Biznesingizni oson va samarali boshqaring.</p>
-                <div class="footer-social">
-                    <a href="#" class="social-icon">f</a>
-                    <a href="#" class="social-icon">in</a>
-                    <a href="#" class="social-icon">t</a>
-                    <a href="#" class="social-icon">ig</a>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">ZELLY</div>
+                    <p class="footer-description">Kafe va restoranlar uchun zamonaviy POS tizim. Biznesingizni oson va
+                        samarali boshqaring.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 footer-section">
+                    <h4>Mahsulot</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="{% url 'index' %}#features">Imkoniyatlar</a></li>
+                        <li><a href="{% url 'index' %}#pricing">Narxlar</a></li>
+                        <li><a href="#" onclick="openVideoModal('{{ site_settings.youtube_id }}')">Demo</a></li>
+                        <li><a href="{% url 'blog' %}">Yangiliklar</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 footer-section">
+                    <h4>Kompaniya</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'team' %}">Jamoamiz</a></li>
+                        <li><a href="{% url 'careers' %}">Karyera</a></li>
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 footer-section">
+                    <h4>Yordam</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#" onclick="openContactModal('Help')">Qo'llab-quvvatlash</a></li>
+                        <li><a href="#">Hujjatlar</a></li>
+                        <li><a href="{% url 'index' %}#faq">FAQ</a></li>
+                        <li><a href="#" onclick="openContactModal('Contact')">Aloqa</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-section">
-                <h4>Mahsulot</h4>
-                <ul class="footer-links">
-                    <li><a href="{% url 'index' %}#features">Imkoniyatlar</a></li>
-                    <li><a href="{% url 'index' %}#pricing">Narxlar</a></li>
-                    <li><a href="#" onclick="openVideoModal('{{ site_settings.youtube_id }}')">Demo</a></li>
-                    <li><a href="{% url 'blog' %}">Yangiliklar</a></li>
-                </ul>
+            <div class="footer-bottom text-center mt-4 pt-4">
+                <p>&copy; 2024 ZELLY. Barcha huquqlar himoyalangan.</p>
             </div>
-            <div class="footer-section">
-                <h4>Kompaniya</h4>
-                <ul class="footer-links">
-                    <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
-                    <li><a href="{% url 'team' %}">Jamoamiz</a></li>
-                    <li><a href="{% url 'careers' %}">Karyera</a></li>
-                    <li><a href="{% url 'blog' %}">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Yordam</h4>
-                <ul class="footer-links">
-                    <li><a href="#" onclick="openContactModal('Help')">Qo'llab-quvvatlash</a></li>
-                    <li><a href="#">Hujjatlar</a></li>
-                    <li><a href="{% url 'index' %}#faq">FAQ</a></li>
-                    <li><a href="#" onclick="openContactModal('Contact')">Aloqa</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 ZELLY. Barcha huquqlar himoyalangan.</p>
         </div>
     </footer>
 
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
     <script src="{% static 'script.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
+
 </html>
